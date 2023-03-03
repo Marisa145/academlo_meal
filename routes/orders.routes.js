@@ -5,13 +5,18 @@ const {
   updateOrder,
   cancelledOrder,
 } = require('../controllers/orders.controller');
-const { protectAccountOwner } = require('../middlewares/auth.middleware');
+const {
+  protectAccountOwner,
+  protect,
+} = require('../middlewares/auth.middleware');
 const {
   validOrder,
   userOrderOnly,
 } = require('../middlewares/orders.middleware');
 
 const router = Router();
+
+router.use(protect);
 
 router.post('/', createOrder),
   router.get('/me', getAllOrders),

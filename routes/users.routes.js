@@ -16,9 +16,11 @@ const {
 
 const router = Router();
 
-router.get('/orders', protect, getAllOrders);
+router.use(protect);
 
-router.get('/orders/:id', protect, getOneOrder);
+router.get('/orders', getAllOrders);
+
+router.get('/orders/:id', getOneOrder);
 
 router.patch(
   '/:id',

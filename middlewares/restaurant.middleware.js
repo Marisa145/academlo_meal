@@ -28,3 +28,22 @@ exports.validRestaurantById = catchAsync(async (req, res, next) => {
   req.restaurant = restaurant;
   next();
 });
+
+exports.validReview = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+
+  const review = await Review.findOne({
+    attributes: { exclude: ['createdAt', 'updatedAt'] },
+    where: {
+      id,
+      status: 'active',
+    },
+  });
+
+  if (!review) {
+    return next(new AppError('Review not found', 400));
+  }
+
+  req.review = review;
+  next();
+});
