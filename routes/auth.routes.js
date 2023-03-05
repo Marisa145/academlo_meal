@@ -31,7 +31,6 @@ router.post(
     check('email', 'The email must be a correct format').isEmail(),
     check('password', 'The password must be mandatory').not().isEmpty(),
     validateFields,
-    validIfExistUserEmail,
   ],
   loginUser
 );
